@@ -99,30 +99,12 @@ local function SimulateGears()
 end
 
 RegisterCommand("manual", function()
-    if hg.vehicle == nil then
-        if hg.manualon == false then
-            hg.manualon = true
-			--TriggerEvent('chatMessage', '', {255, 255, 255}, '^7' .. 'Manual Mode ON' .. '^7.')
-        else
-            hg.manualon = false
-			--TriggerEvent('chatMessage', '', {255, 255, 255}, '^7' .. 'Manual Mode OFF' .. '^7.')
-        end
-    end
+    hg.manualon = not hg.manualon
 end)
 
 RegisterCommand("manualmode", function()
-    if hg.vehicle == nil then
-        if hg.manualon == false then
-
-        else
-            if hg.realistic == true then
-                hg.realistic = false
-				--TriggerEvent('chatMessage', '', {255, 255, 255}, '^7' .. 'Manual Mode SIMPLE' .. '^7.')
-            else
-                hg.realistic = true
-				--TriggerEvent('chatMessage', '', {255, 255, 255}, '^7' .. 'Manual Mode REALISTIC' .. '^7.')
-            end
-        end
+    if hg.manualon then
+        hg.realistic = not hg.realistic
     end
 end)
 
@@ -400,7 +382,8 @@ Citizen.CreateThread(function()
 end)
 
 Citizen.CreateThread(function()
-    while true do
+    local should_draw = Config.gearhud == 1 or Config.gearhud == 2
+    while should_draw do
         Citizen.Wait(0)
         --if manualon == true and vehicle ~= nil then
         SetTextFont(0)
