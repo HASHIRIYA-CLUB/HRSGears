@@ -98,11 +98,11 @@ local function SimulateGears()
     SetVehicleMod(hg.vehicle,11,engineup,false)
 end
 
-RegisterCommand("manual", function()
+RegisterNetEvent("HRSGears:manual", function()
     hg.manualon = not hg.manualon
 end)
 
-RegisterCommand("manualmode", function()
+RegisterNetEvent("HRSGears:manualmode", function()
     if hg.manualon then
         hg.realistic = not hg.realistic
     end
